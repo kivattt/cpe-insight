@@ -216,10 +216,10 @@ func main() {
 	h := flag.Bool("help", false, "display this help and exit")
 	v := flag.Bool("version", false, "output version information and exit")
 	list := flag.Bool("list", false, "list all API endpoints")
-	endPoint := flag.String("endpoint", "", "request endpoint")
+	endPoint := flag.String("endpoint", "", "request single endpoint")
 	all := flag.Bool("all", false, "request all endpoints")
 	password := flag.String("password", "", "router admin password")
-	output := flag.String("output", "", "output json to file")
+	output := flag.String("output", "", "output JSON to file")
 
 	getopt.CommandLine.SetOutput(os.Stdout)
 	getopt.CommandLine.Init(PROGRAM_NAME, flag.ExitOnError)
