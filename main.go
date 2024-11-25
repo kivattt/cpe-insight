@@ -298,16 +298,16 @@ func main() {
 			os.Exit(1)
 		}
 
-		bytes, err := json.Marshal(resp)
+		/*bytes, err := json.Marshal(resp)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
-		}
+		}*/
 
 		if *output == "" {
-			fmt.Print(string(bytes))
+			fmt.Print(string(resp))
 		} else {
-			err := os.WriteFile(*output, bytes, 0o664)
+			err := os.WriteFile(*output, resp, 0o664)
 			if err != nil {
 				fmt.Println(err)
 				os.Exit(1)
@@ -316,6 +316,7 @@ func main() {
 	} else if *all {
 		var builder strings.Builder
 		builder.WriteString("{")
+		i := 0
 		for endPointKey := range apiEndPoints {
 			os.Stderr.WriteString("\x1b[0;34mRequesting: " + endPointKey + "\x1b[0m\n")
 			builder.WriteString("\"" + endPointKey + "\":")
@@ -326,7 +327,10 @@ func main() {
 				builder.Write(resp)
 			}
 
-			builder.WriteString(",")
+			if i != len(apiEndPoints)-1 {
+				builder.WriteString(",")
+			}
+			i++
 		}
 		builder.WriteString("}")
 
