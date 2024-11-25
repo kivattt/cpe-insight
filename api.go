@@ -13,16 +13,31 @@ func PrintEndPoints() {
 	longestKeyLength := 0
 	longestValueLength := 0
 
-	type EndPoint struct {
-		key string
-		url string
-	}
-
-	apiEndPointsSorted := make([]EndPoint, len(apiEndPoints))
-	i := 0
 	for k, v := range apiEndPoints {
 		longestKeyLength = max(longestKeyLength, len(k))
 		longestValueLength = max(longestValueLength, len(v))
+	}
+
+	fmt.Print("\x1b[1;4m") // Bold
+	fmt.Print("NAME" + strings.Repeat(" ", longestKeyLength-len("NAME")))
+	fmt.Println(" ENDPOINT" + strings.Repeat(" ", longestValueLength-len("ENDPOINT")))
+	fmt.Print("\x1b[0m") // Reset
+
+	// TODO: Use $PAGER with a fallback when not on Windows
+	for _, e := range GetAPIEndPointsSorted() {
+		fmt.Println(e.key + " \x1b[0;34m" + strings.Repeat(" ", longestKeyLength-len(e.key)) + e.url + "\x1b[0m")
+	}
+}
+
+type EndPoint struct {
+	key string
+	url string
+}
+
+func GetAPIEndPointsSorted() []EndPoint {
+	apiEndPointsSorted := make([]EndPoint, len(apiEndPoints))
+	i := 0
+	for k, v := range apiEndPoints {
 		apiEndPointsSorted[i] = EndPoint{key: k, url: v}
 		i++
 	}
@@ -31,15 +46,7 @@ func PrintEndPoints() {
 		return strings.Compare(a.key, b.key)
 	})
 
-	fmt.Print("\x1b[1;4m") // Bold
-	fmt.Print("NAME" + strings.Repeat(" ", longestKeyLength-len("NAME")))
-	fmt.Println(" ENDPOINT" + strings.Repeat(" ", longestValueLength-len("ENDPOINT")))
-	fmt.Print("\x1b[0m") // Reset
-
-	// TODO: Use $PAGER with a fallback when not on Windows
-	for _, e := range apiEndPointsSorted {
-		fmt.Println(e.key + " \x1b[0;34m" + strings.Repeat(" ", longestKeyLength-len(e.key)) + e.url + "\x1b[0m")
-	}
+	return apiEndPointsSorted
 }
 
 // "${t}" is replaced with the username

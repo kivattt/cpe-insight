@@ -317,10 +317,10 @@ func main() {
 		var builder strings.Builder
 		builder.WriteString("{")
 		i := 0
-		for endPointKey := range apiEndPoints {
-			os.Stderr.WriteString("\x1b[0;34mRequesting: " + endPointKey + "\x1b[0m\n")
-			builder.WriteString("\"" + endPointKey + "\":")
-			resp, err := getRequest(endPointKey, cookies, cpe)
+		for _, e := range GetAPIEndPointsSorted() {
+			os.Stderr.WriteString("\x1b[0;34mRequesting: " + e.key + "\x1b[0m\n")
+			builder.WriteString("\"" + e.key + "\":")
+			resp, err := getRequest(e.key, cookies, cpe)
 			if err != nil {
 				builder.WriteString("\"Error requesting: " + sanitizeForJSON(err.Error()) + "\"")
 			} else {
