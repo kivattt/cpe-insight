@@ -1,3 +1,5 @@
+<img src="screenshots/status.png" alt="Requesting the status endpoint, and visualizing the JSON response with jq">
+
 This only supports requesting the GET endpoints of the API, but not these:
 ```
 /${t}/telemetry-historic/${e}
