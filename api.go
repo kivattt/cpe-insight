@@ -2,19 +2,34 @@ package main
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 )
 
 const CPE_INSIGHT_API_VERSION = "42.4242"
+const CPE_INSIGHT_API_BASE_URL = "/v1"
 
-// TODO: Sort the output
 func PrintEndPoints() {
 	longestKeyLength := 0
 	longestValueLength := 0
+
+	type EndPoint struct {
+		key string
+		url string
+	}
+
+	apiEndPointsSorted := make([]EndPoint, len(apiEndPoints))
+	i := 0
 	for k, v := range apiEndPoints {
 		longestKeyLength = max(longestKeyLength, len(k))
 		longestValueLength = max(longestValueLength, len(v))
+		apiEndPointsSorted[i] = EndPoint{key: k, url: v}
+		i++
 	}
+
+	slices.SortFunc(apiEndPointsSorted, func(a, b EndPoint) int {
+		return strings.Compare(a.key, b.key)
+	})
 
 	fmt.Print("\x1b[1;4m") // Bold
 	fmt.Print("NAME" + strings.Repeat(" ", longestKeyLength-len("NAME")))
@@ -22,9 +37,8 @@ func PrintEndPoints() {
 	fmt.Print("\x1b[0m") // Reset
 
 	// TODO: Use $PAGER with a fallback when not on Windows
-	for k, v := range apiEndPoints {
-		//fmt.Println("\x1b[0;34m" + k + "\x1b[0m " + strings.Repeat(" ", longestKeyLength - len(k)) + v)
-		fmt.Println(k + " \x1b[0;34m" + strings.Repeat(" ", longestKeyLength-len(k)) + v + "\x1b[0m")
+	for _, e := range apiEndPointsSorted {
+		fmt.Println(e.key + " \x1b[0;34m" + strings.Repeat(" ", longestKeyLength-len(e.key)) + e.url + "\x1b[0m")
 	}
 }
 
