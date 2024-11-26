@@ -18,7 +18,7 @@ import (
 )
 
 const PROGRAM_NAME = "cpe-insight"
-const VERSION = "v0.0.2"
+const VERSION = "v1.0.0"
 const BASE_URL = "https://wifi.telenor.no"
 
 func whereIsPassword(model string) string {

@@ -1,1 +1,2 @@
 - Identify the CPE Insight API version and warn on stderr if not supported, ensure only containing digits and '.'
+- When being piped, output errors as JSON aswell (think common jq usage)
