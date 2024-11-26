@@ -31,7 +31,7 @@ Requesting all endpoints and storing in a `file.json` JSON file:
 ```
 cpe-insight --password="..." --all --output file.json
 ```
-To look through all the responses, open the `file.json` in your web-browser of choice
+To look through all the responses, open the `file.json` in Firefox
 
 It sends requests to `https://wifi.telenor.no`
 
