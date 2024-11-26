@@ -1,4 +1,4 @@
-cpe-insight is a tool to request information from your Telenor router\
+cpe-insight is a tool to request information from your router from Telenor\
 Downloads are available for Linux, FreeBSD and Windows
 
 <img src="screenshots/status.png" alt="Requesting the status endpoint, and visualizing the JSON response with jq" width="50%">
