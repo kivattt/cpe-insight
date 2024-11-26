@@ -1,0 +1,1 @@
+- Identify the CPE Insight API version and warn on stderr if not supported, ensure only containing digits and '.'

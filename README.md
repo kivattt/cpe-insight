@@ -43,6 +43,3 @@ cpe-insight currently only supports requesting the GET endpoints of the CPE Insi
 /${t}/telemetry-historic/${e}
 /${t}/forgot-password/change/${e}/${r}
 ```
-
-## Development TODOs
-- Identify the CPE Insight API version and warn on stderr if not supported, ensure only containing digits and '.'
